@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Copyright (c) 2017-present, BigCommerce Pty. Ltd. All rights reserved
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -17,40 +15,14 @@
 #
 module Gruf
   module Interceptors
-    ##
-    # Base class for interception requests
-    #
-    class Base
-      # @!attribute request
-      #   @return [Gruf::Controllers::Request]
-      attr_reader :request
-      # @!attribute error
-      #   @return [Gruf::Error]
-      attr_reader :error
-      # @!attribute options
-      #   @return [Hash]
-      attr_reader :options
-
-      ##
-      # @param [Gruf::Controllers::Request] request
-      # @param [Gruf::Error] error
-      # @param [Hash] options
-      #
-      def initialize(request, error, options = {})
-        @request = request
-        @error = error
-        @options = options || {}
+    module Instrumentation
+      module RequestLogging
+        module Formatters
+          class Logstash < Base
+            def format: (::Hash payload, request: ::Gruf::Controllers::Request request, result: ::Gruf::Interceptors::Timer::Result result) -> ::String
+          end
+        end
       end
     end
   end
 end
-
-require_relative 'client_interceptor'
-require_relative 'server_interceptor'
-require_relative 'context'
-require_relative 'timer'
-require_relative 'active_record/connection_reset'
-require_relative 'authentication/basic'
-require_relative 'instrumentation/statsd'
-require_relative 'instrumentation/output_metadata_timer'
-require_relative 'instrumentation/request_logging/interceptor'

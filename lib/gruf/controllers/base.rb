@@ -26,13 +26,16 @@ module Gruf
     class Base
       include Gruf::Errors::Helpers
 
-      # @var [Gruf::Controller::Request] request
+      # @!attribute request
+      #   @return [Gruf::Controller::Request]
       attr_reader :request
-      # @var [Gruf::Error] error
+      # @!attribute error
+      #   @return [Gruf::Error]
       attr_reader :error
 
       class << self
-        # @var [GRPC::GenericService] bound_service
+        # @!attribute bound_service
+        #   @return [GRPC::GenericService]
         attr_reader :bound_service
       end
 

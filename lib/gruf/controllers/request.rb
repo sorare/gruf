@@ -106,6 +106,7 @@ module Gruf
       # Return all messages for this request, properly handling different request types
       #
       # @return [Enumerable<Object>] All messages for this request
+      # @return [Object] A single object for bidi streams
       #
       def messages
         if client_streamer?

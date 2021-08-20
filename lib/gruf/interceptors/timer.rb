@@ -24,12 +24,13 @@ module Gruf
       ##
       # Represents a timed result for an interceptor
       #
-      # @property [Object] message The protobuf message
-      # @property [Float] elapsed The elapsed time of the request
-      #
       class Result
-        attr_reader :message,
-                    :elapsed
+        # @!attribute message
+        #   @return [Object] The protobuf message
+        attr_reader :message
+        # @!attribute elapsed
+        #   @return [Float] The elapsed time of the request
+        attr_reader :elapsed
 
         ##
         # @param [Object] message The protobuf message
@@ -53,7 +54,7 @@ module Gruf
         # @return [String] The name of the message class
         #
         def message_class_name
-          @message.class.name
+          @message.class.name.to_s
         end
 
         ##
